@@ -6,7 +6,15 @@
 
 A delightful ASCII art train animation for your terminal, bringing joy to command-line enthusiasts everywhere!
 
-![slTrain Demo](https://raw.githubusercontent.com/developtheweb/slTrain/main/demo.gif)
+```
+                      . . . . . o o o o o
+   _____
+  __|[_]|__ ___________ _______    ____      o
+ |[] [] []| [] [] [] [] [_____(__  ][]]_n_n__][.
+_|________|_[_________]_[________]_|__|________)<
+  oo    oo 'oo      oo ' oo    oo 'oo 0000---oo\_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## 🌟 Features
 
