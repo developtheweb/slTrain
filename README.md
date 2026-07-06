@@ -31,12 +31,17 @@ __/ =| o |=-~~\  /~~\  /~~\  /~~\ ____Y___________|__
 
 ## ✨ Features
 
-- 🚂 **Multiple train types** - Classic, D51, and C51 locomotives
-- ✈️ **Flying mode** - Make the train fly across the sky (`-F`)
-- 💥 **Accident mode** - Watch a dramatic crash (`-a`)
-- 🎨 **Colorful ASCII art** - Beautiful colored trains with dynamic smoke
+- 🚂 **Multiple train types** - Classic, Small, D51, and C51 locomotives (`-t`)
+- 🛞 **Animated wheels** - Wheels that actually turn as the train rolls
+- 💨 **Particle smoke** - Smoke that drifts behind the train and dissipates
+- 🚃 **Coal cars** - Couple up to 8 tenders behind the locomotive (`-n`)
+- ✈️ **Flying mode** - Make the train fly across the sky with a stardust trail (`-F`)
+- 💥 **Accident mode** - Screen shake, sparks, and a proper BOOM (`-a`)
+- 📣 **Whistle** - The train toots as it passes (`-w`)
+- 🖥️ **Flicker-free rendering** - Double-buffered frames on the alternate screen; your terminal contents are restored when the train has passed
+- 🎨 **Colorful ASCII art** - Colored trains with grayscale smoke on 256-color terminals; honors `NO_COLOR` and `--no-color`
 - ⚡ **Adjustable speed** - Control animation speed
-- 📐 **Terminal-aware** - Handles terminal resizing gracefully
+- 📐 **Terminal-aware** - Handles terminal resizing gracefully; `sl | cat` prints a static train instead of escape codes
 - 🛡️ **Clean exit** - Proper cleanup and Ctrl+C handling
 - 🪶 **Lightweight** - No external dependencies, pure Python
 
@@ -116,7 +121,10 @@ $ sl              # Classic train
 $ sl -F           # Flying train
 $ sl -a           # Train accident
 $ sl -c           # C51 train type
-$ sl -l           # Long train (D51)
+$ sl -l           # Long train (D51 pulling coal cars)
+$ sl -n 4         # Pull 4 coal cars
+$ sl -t small     # Small train for narrow terminals
+$ sl -w           # Sound the whistle
 $ sl -s 2.0       # Double speed
 $ sl --help       # Show help
 ```
@@ -127,9 +135,13 @@ $ sl --help       # Show help
 |--------|-----------|-------------|
 | `-a` | `--accident` | An accident occurs partway through |
 | `-F` | `--fly` | Make the train fly through the sky |
-| `-l` | `--long` | Use a longer train (D51) |
+| `-l` | `--long` | Use a longer train (D51 pulling coal cars) |
 | `-c` | `--C51` | Use the C51 train type |
-| `-s` | `--speed` | Animation speed multiplier (default: 1.0) |
+| `-t` | `--type` | Locomotive type: `classic`, `small`, `d51`, `c51` (overrides `-l`/`-c`) |
+| `-n` | `--cars` | Number of coal cars to pull, up to 8 (default: 0) |
+| `-w` | `--whistle` | Sound the whistle as the train passes |
+| `-s` | `--speed` | Animation speed multiplier, 0.1–20 (default: 1.0) |
+| | `--no-color` | Disable colors (`NO_COLOR` is also honored) |
 | `-v` | `--version` | Show version information |
 | `-h` | `--help` | Show help message |
 
