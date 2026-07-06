@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-07-06
+
+### Added
+- Surprise mode: a bare `sl` (the classic mistyped `ls`) now randomizes the
+  whole show each run — train type, coal-car count, color livery (named
+  themes plus fully random one-offs), and speed, with an occasional whistle
+  (25%), a rare flight (10%), and a very rare crash (5%)
+
+### Changed
+- Any command-line flag disables surprise mode entirely; explicit options
+  remain fully deterministic and backward compatible
+
 ## [3.0.0] - 2026-07-06
 
 ### Added

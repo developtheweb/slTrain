@@ -26,7 +26,7 @@ import time
 from typing import Dict, List, Optional
 
 # Version
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 
 
 # ANSI escape codes for colors and cursor control
@@ -69,6 +69,24 @@ CHAR_COLORS = {
     'o': ANSI.WHITE,
     '~': ANSI.CYAN,
 }
+
+# Alternate liveries for surprise mode
+COLOR_THEMES = [
+    CHAR_COLORS,
+    {'D': ANSI.YELLOW, '_': ANSI.RED, '|': ANSI.RED,
+     '=': ANSI.YELLOW, 'O': ANSI.WHITE, 'o': ANSI.WHITE, '~': ANSI.MAGENTA},
+    {'D': ANSI.WHITE, '_': ANSI.CYAN, '|': ANSI.BLUE,
+     '=': ANSI.CYAN, 'O': ANSI.WHITE, 'o': ANSI.WHITE, '~': ANSI.BLUE},
+    {'D': ANSI.MAGENTA, '_': ANSI.GREEN, '|': ANSI.MAGENTA,
+     '=': ANSI.CYAN, 'O': ANSI.YELLOW, 'o': ANSI.YELLOW, '~': ANSI.GREEN},
+]
+
+
+def random_theme() -> Dict[str, str]:
+    """A one-off livery: each character class gets a random color."""
+    pool = [ANSI.RED, ANSI.GREEN, ANSI.YELLOW, ANSI.BLUE,
+            ANSI.MAGENTA, ANSI.CYAN, ANSI.WHITE]
+    return {ch: random.choice(pool) for ch in CHAR_COLORS}
 
 
 class Train:
@@ -338,13 +356,15 @@ class SLAnimation:
     def __init__(self, train_type: str = "classic", speed: float = 1.0,
                  fly: bool = False, accident: bool = False,
                  cars: int = 0, whistle: bool = False,
-                 use_color: bool = True):
+                 use_color: bool = True,
+                 palette: Optional[Dict[str, str]] = None):
         self.train_type = train_type
         self.speed = max(0.1, min(speed, 20.0))
         self.fly = fly
         self.accident = accident
         self.whistle = whistle
         self.use_color = use_color
+        self.palette = palette or CHAR_COLORS
         self.running = True
         self.resized = False
 
@@ -466,7 +486,7 @@ class SLAnimation:
                            color=self.rail_color)
             particles.draw(screen)
             for i, line in enumerate(art):
-                screen.put(x, y + i, line, charmap=CHAR_COLORS, opaque=True)
+                screen.put(x, y + i, line, charmap=self.palette, opaque=True)
             if frame_i < toot_until:
                 screen.put(x + self.funnel_dx + 3, y + self.funnel_dy - 2,
                            'TOOT! TOOT!', color=ANSI.WHITE)
@@ -517,7 +537,7 @@ class SLAnimation:
             particles.draw(screen)
             for i, line in enumerate(art):
                 screen.put(x + dx, y + i + dy, line,
-                           charmap=CHAR_COLORS, opaque=True)
+                           charmap=self.palette, opaque=True)
             if f < 32 and (f // 3) % 2 == 0:
                 color = ANSI.RED if (f // 6) % 2 == 0 else ANSI.YELLOW
                 screen.put(x + 6, y - 2, messages[(f // 6) % 2], color=color)
@@ -576,15 +596,32 @@ def main():
                  and 'NO_COLOR' not in os.environ
                  and sys.stdout.isatty())
 
+    # Surprise mode: a bare `sl` -- the classic mistyped `ls` -- rolls the
+    # dice on everything, so no two typos look alike. Any flag at all
+    # switches back to fully deterministic behavior.
+    palette = None
+    speed = args.speed
+    fly, accident, whistle = args.fly, args.accident, args.whistle
+    if len(sys.argv) == 1:
+        train_type = random.choice(list(Train.TRAINS))
+        cars = random.choice([0, 0, 0, 1, 2, 2, 3, 4, 8])
+        palette = random.choice(COLOR_THEMES + [random_theme()])
+        speed = random.uniform(0.8, 1.5)
+        whistle = random.random() < 0.25
+        roll = random.random()
+        accident = roll < 0.05          # rare: the typo ends in tragedy
+        fly = 0.05 <= roll < 0.15       # rare: the typo takes flight
+
     # Run animation
     animation = SLAnimation(
         train_type=train_type,
-        speed=args.speed,
-        fly=args.fly,
-        accident=args.accident,
+        speed=speed,
+        fly=fly,
+        accident=accident,
         cars=cars,
-        whistle=args.whistle,
+        whistle=whistle,
         use_color=use_color,
+        palette=palette,
     )
 
     animation.run()

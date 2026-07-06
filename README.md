@@ -1,132 +1,115 @@
-# 🚂 sl - Steam Locomotive
+# 🚂 sl — Steam Locomotive
 
 [![GitHub stars](https://img.shields.io/github/stars/developtheweb/slTrain?style=social)](https://github.com/developtheweb/slTrain/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/developtheweb/slTrain?style=social)](https://github.com/developtheweb/slTrain/network/members)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
 [![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20%7C%20unix-lightgrey.svg)](https://github.com/developtheweb/slTrain)
+[![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](requirements.txt)
 [![Maintained](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/developtheweb/slTrain/commits/main)
 [![Website](https://img.shields.io/badge/website-StevenMilanese.com-blue.svg)](https://stevenmilanese.com)
 
-A joke command that displays an animated steam locomotive in your terminal when you accidentally type 'sl' instead of 'ls'.
+> You typed `sl`. You meant `ls`. The railroad thanks you for your patronage.
 
 ```
       ====        ________                ___________
   _D _|  |_______/        \__I_I_____===__|_________|
-   |(_)---  |   H\________/ |   |        =|___ ___|  
-   /     |  |   H  |  |     |   |         ||_| |_||  
-  |      |  |   H  |__--------------------| [___] |  
-  | ________|___H__/__|_____/[][]~\_______|       |  
+   |(_)---  |   H\________/ |   |        =|___ ___|
+   /     |  |   H  |  |     |   |         ||_| |_||
+  |      |  |   H  |__--------------------| [___] |
+  | ________|___H__/__|_____/[][]~\_______|       |
   |/ |   |-----------I_____I [][] []  D   |=======|__
 __/ =| o |=-~~\  /~~\  /~~\  /~~\ ____Y___________|__
- |/-=|___|=    ||    ||    ||    |_____/~\___/       
-  \_/      \O=====O=====O=====O_/      \_/           
+ |/-=|___|=    ||    ||    ||    |_____/~\___/
+  \_/      \O=====O=====O=====O_/      \_/
 ```
 
-## 🎥 Demo
+Every other command punishes a typo with an error message. `sl` rewards it
+with a steam locomotive. The entire point is maximal output for minimal
+input — two mistyped letters buy you a train, and you *will* watch it cross
+your terminal, because that is the punishment and the prize.
 
-![sl command demo](https://raw.githubusercontent.com/developtheweb/slTrain/main/assets/sl-demo.gif)
+This is a single-file, zero-dependency Python train that takes the joke
+entirely too seriously: a flicker-free double-buffered renderer, wheels that
+actually turn, smoke that drifts and dissipates, coal cars, a whistle, and a
+crash mode that earns its flag.
 
-*Watch the train cross your terminal when you mistype!*
+## 🎲 No two typos look alike
+
+A bare `sl` — the classic fumbled `ls` — rolls the dice on everything:
+locomotive type, coal-car count, color livery (four named themes plus
+fully random one-offs), and speed. Sometimes it whistles. Rarely, it flies.
+Very rarely, it does not make it across.
+
+| Event | Odds |
+|-------|------|
+| 📣 The train whistles | 1 in 4 |
+| ✈️ The train takes flight | 1 in 10 |
+| 💥 The train does not arrive at the station | 1 in 20 |
+
+Pass any flag and the dice are off — explicit options are fully
+deterministic, so your customizations always behave exactly as written.
 
 ## ✨ Features
 
-- 🚂 **Multiple train types** - Classic, Small, D51, and C51 locomotives (`-t`)
-- 🛞 **Animated wheels** - Wheels that actually turn as the train rolls
-- 💨 **Particle smoke** - Smoke that drifts behind the train and dissipates
-- 🚃 **Coal cars** - Couple up to 8 tenders behind the locomotive (`-n`)
-- ✈️ **Flying mode** - Make the train fly across the sky with a stardust trail (`-F`)
-- 💥 **Accident mode** - Screen shake, sparks, and a proper BOOM (`-a`)
-- 📣 **Whistle** - The train toots as it passes (`-w`)
-- 🖥️ **Flicker-free rendering** - Double-buffered frames on the alternate screen; your terminal contents are restored when the train has passed
-- 🎨 **Colorful ASCII art** - Colored trains with grayscale smoke on 256-color terminals; honors `NO_COLOR` and `--no-color`
-- ⚡ **Adjustable speed** - Control animation speed
-- 📐 **Terminal-aware** - Handles terminal resizing gracefully; `sl | cat` prints a static train instead of escape codes
-- 🛡️ **Clean exit** - Proper cleanup and Ctrl+C handling
-- 🪶 **Lightweight** - No external dependencies, pure Python
+- 🎲 **Surprise mode** — a bare `sl` randomizes the whole show, every run
+- 🚂 **Four locomotives** — Classic, Small, D51, and C51 (`-t`)
+- 🛞 **Animated wheels** — a 4-frame rotation cycle on every engine
+- 💨 **Particle smoke** — drifts behind the train and dissipates, with grayscale shading on 256-color terminals
+- 🚃 **Coal cars** — couple up to 8 tenders behind the engine (`-n`)
+- ✈️ **Flying mode** — smoothstep climb with a stardust trail (`-F`)
+- 💥 **Accident mode** — screen shake, a spark shower, and a proper BOOM (`-a`)
+- 📣 **Whistle** — the train toots as it passes (`-w`)
+- 🖥️ **Flicker-free** — double-buffered frames on the alternate screen; your terminal contents come back when the train has passed
+- 🎨 **Respectful of your eyes** — honors `NO_COLOR` and `--no-color`; `sl | cat` prints a static train instead of escape-code soup
+- 📐 **Terminal-aware** — live resize handling, clean Ctrl+C, monotonic frame pacing that doesn't drift
+- 🪶 **Zero dependencies** — one file, pure Python standard library
 
 ## 📦 Installation
 
-### Quick Install (Recommended)
-
 ```bash
-# Clone the repository
-git clone https://github.com/developtheweb/slTrain.git
-cd slTrain
-
-# Install to /usr/local/bin
-sudo make install
-```
-
-### Platform-Specific Instructions
-
-<details>
-<summary><b>🐧 Linux</b></summary>
-
-```bash
-# Debian/Ubuntu
-git clone https://github.com/developtheweb/slTrain.git
-cd slTrain
-sudo make install
-
-# Arch Linux (AUR)
-# Coming soon!
-
-# Manual install
-sudo cp sl /usr/local/bin/
-sudo chmod +x /usr/local/bin/sl
-```
-</details>
-
-<details>
-<summary><b>🍎 macOS</b></summary>
-
-```bash
-# Using Homebrew (coming soon)
-# brew install sl
-
-# Manual install
 git clone https://github.com/developtheweb/slTrain.git
 cd slTrain
 sudo make install
 ```
-</details>
 
-<details>
-<summary><b>🐳 Docker</b></summary>
+That installs to `/usr/local/bin/sl`. Prefer to do it by hand?
 
 ```bash
-# Run without installing
-docker run --rm -it ghcr.io/developtheweb/sl:latest
-
-# Alias for easy use
-alias sl='docker run --rm -it ghcr.io/developtheweb/sl:latest'
+sudo cp sl /usr/local/bin/ && sudo chmod +x /usr/local/bin/sl
 ```
-</details>
+
+**Requirements:** Python 3.6+, a Unix-like terminal with ANSI escape
+support, and a sense of humor. Nothing else — see
+[requirements.txt](requirements.txt), which is proudly empty.
 
 ### Uninstall
 
 ```bash
 sudo make uninstall
-# or
-sudo rm /usr/local/bin/sl
 ```
+
+The train will remember this.
 
 ## 🚀 Usage
 
-Simply type `sl` instead of `ls`:
+You don't *use* `sl`. You commit a typo, and `sl` happens to you:
 
 ```bash
-$ sl              # Classic train
-$ sl -F           # Flying train
-$ sl -a           # Train accident
-$ sl -c           # C51 train type
-$ sl -l           # Long train (D51 pulling coal cars)
-$ sl -n 4         # Pull 4 coal cars
-$ sl -t small     # Small train for narrow terminals
-$ sl -w           # Sound the whistle
-$ sl -s 2.0       # Double speed
-$ sl --help       # Show help
+$ sl              # 🎲 Surprise! Random train, livery, cars, and speed
+```
+
+But if you insist on driving:
+
+```bash
+$ sl -t classic   # The classic engine, no surprises
+$ sl -l           # Long train: D51 pulling coal cars
+$ sl -n 8         # Maximum coal. The economy is booming
+$ sl -F           # Flight
+$ sl -a           # Tragedy
+$ sl -w -c        # A whistling C51
+$ sl -s 2.0       # You have somewhere to be
+$ sl -s 0.1       # You do not
 ```
 
 ### Options
@@ -145,61 +128,81 @@ $ sl --help       # Show help
 | `-v` | `--version` | Show version information |
 | `-h` | `--help` | Show help message |
 
-## 🤔 Why sl?
+Any flag disables surprise mode. The dice only roll for a naked typo.
 
-We've all done it - typed `sl` when we meant `ls`. Instead of getting an error, why not get a gentle reminder in the form of a steam locomotive chugging across your terminal? 
+## 🔧 How it works
 
-### Benefits:
-- 📚 **Learn to type more carefully** - Muscle memory training through humor
-- 😄 **Add whimsy to your command line** - Because terminals can be fun too
-- 🎭 **Surprise your coworkers** - Watch their confusion turn to delight
-- 🧘 **Take a brief mental break** - Sometimes you need a train break
+For a joke, it's built like it matters:
 
-## 📋 Requirements
+- **Double-buffered rendering.** Each frame is composed into an off-screen
+  cell buffer and emitted as a single write — no clear-screen between
+  frames, so nothing flickers, ever.
+- **The alternate screen.** The animation runs on the terminal's alternate
+  buffer, the same trick `vim` and `less` use. When the train is gone, your
+  scrollback is exactly as you left it. Like it never happened. It happened.
+- **A particle system.** Smoke, crash sparks, and stardust are particles
+  with velocity, drag, and gravity, aging through character ramps
+  (`@` → `O` → `o` → `*` → `.`) as they dissipate.
+- **Monotonic pacing.** Frame timing is anchored to a monotonic clock, so
+  the train's speed doesn't drift with render cost or system load.
+- **An honest fallback.** If stdout isn't a terminal, you get a static
+  train in plain text. `sl | cat` is a train. `sl > file.txt` is a train.
+  There is no escaping the train, only escape codes, and those are omitted.
 
-- Python 3.6 or higher
-- Unix-like terminal with ANSI escape code support
-- A sense of humor 😄
+## 🤔 Why does this exist?
+
+We've all done it — typed `sl` when we meant `ls`. Instead of
+`command not found`, why not a gentle reminder in the form of a steam
+locomotive chugging across your terminal?
+
+- 📚 **Typing discipline through consequences** — muscle memory training, enforced by rail
+- 😄 **Whimsy in the command line** — terminals can be fun too
+- 🎭 **Coworker delight** — watch confusion turn to joy, then back to confusion when it crashes
+- 🧘 **Mandatory micro-breaks** — the train cannot be skipped, only awaited
+
+## ❓ FAQ
+
+**Can I stop the train?**
+Ctrl+C works and exits cleanly. Learning to type `ls` also works, but nobody
+has ever managed it.
+
+**The train crashed. Is that a bug?**
+If you passed `-a`, that's a feature. If you didn't, that's a 1-in-20 roll
+of surprise mode, and honestly, it's a little bit on you for typing `sl`.
+
+**Why would a train fly?**
+1-in-10 odds say you'll find out.
+
+**Is this compatible with the original `sl`?**
+The spirit, the D51/C51 art heritage, and the `-a`/`-F`/`-l`/`-c` flags are
+all honored. The renderer, particles, and surprise mode are new.
 
 ## 🤝 Contributing
 
-We love contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### Quick Start for Contributors
+Contributions are welcome — new locomotives, new liveries, new disasters.
+See the [Contributing Guidelines](CONTRIBUTING.md).
 
 ```bash
-# Fork and clone the repository
 git clone https://github.com/YOUR_USERNAME/slTrain.git
 cd slTrain
-
-# Create a feature branch
 git checkout -b feature/amazing-feature
-
-# Make your changes and test
-./sl -F  # Test your changes
-
-# Commit and push
+./sl -F                  # test your changes
 git commit -m "Add amazing feature"
 git push origin feature/amazing-feature
 ```
 
 ## 💖 Support the Project
 
-If you enjoy `sl`, consider supporting the development:
-
-- ⭐ **Star this repository** - It helps others discover the project
-- 🐛 **Report bugs** - Help us improve by [reporting issues](https://github.com/developtheweb/slTrain/issues)
-- 💡 **Suggest features** - Share your ideas for new train types or animations
-- 🌐 **Visit my website** - Learn more at [StevenMilanese.com](https://stevenmilanese.com)
-- ☕ **Buy me a coffee** - Support development at [StevenMilanese.com/support](https://stevenmilanese.com/support)
-
-## 🔒 Security
-
-Found a security issue? Please see our [Security Policy](SECURITY.md) for responsible disclosure.
+- ⭐ **Star this repository** — it helps others discover the train
+- 🐛 **Report bugs** — [open an issue](https://github.com/developtheweb/slTrain/issues)
+- 💡 **Suggest features** — new train types, animations, or calamities
+- 🌐 **Visit my website** — [StevenMilanese.com](https://stevenmilanese.com)
+- ☕ **Buy me a coffee** — [StevenMilanese.com/support](https://stevenmilanese.com/support)
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT — see [LICENSE](LICENSE). The train is free. The train has always been
+free.
 
 ## 👨‍💻 Author
 
@@ -212,10 +215,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Inspired by the original `sl` command by Toyoda Masashi
-- ASCII art trains adapted from various sources
-- Thanks to all [contributors](https://github.com/developtheweb/slTrain/graphs/contributors) who have helped improve this project
-- Special thanks to the first stargazer who inspired this update! ⭐
+- Inspired by the original `sl` by **Toyoda Masashi** (1993), who understood
+  that the punishment for a typo should be beautiful
+- The coal car art is adapted from the original `sl`
+- Thanks to all [contributors](https://github.com/developtheweb/slTrain/graphs/contributors)
+- Special thanks to the first stargazer who inspired this update ⭐
 
 ## 📊 Project Stats
 
@@ -226,7 +230,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <p align="center">
-  <i>Remember: It's not a bug, it's a feature! 🚂</i>
+  <i>It's not a bug, it's a locomotive. 🚂</i>
   <br><br>
   Made with ❤️ by <a href="https://stevenmilanese.com">Reverend Steven Milanese</a>
   <br>
