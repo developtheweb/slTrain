@@ -197,7 +197,7 @@ git push origin feature/amazing-feature
 - 🐛 **Report bugs** — [open an issue](https://github.com/developtheweb/slTrain/issues)
 - 💡 **Suggest features** — new train types, animations, or calamities
 - 🌐 **Visit my website** — [StevenMilanese.com](https://stevenmilanese.com)
-- ☕ **Buy me a coffee** — [StevenMilanese.com/support](https://stevenmilanese.com/support)
+- ☕ **Buy me a coffee** — [buymeacoffee.com/strangequark](https://buymeacoffee.com/strangequark)
 
 ## 📝 License
 
