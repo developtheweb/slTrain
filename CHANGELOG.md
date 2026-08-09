@@ -7,6 +7,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-08-09 — The Sea Update
+
+### Added
+- Four vessels join the roster via `-t`: `galleon` (three-masted pirate
+  ship with a flapping Jolly Roger, animated pennants, rigging, gunports,
+  and a rubber-duck figurehead), `steamer` (sternwheeler whose paddle
+  wheel turns on the same 4-frame machinery as the locomotive wheels,
+  with churn that streams aft), `sloop` (racing yacht for narrow
+  terminals), and `tug` (drawn in three-quarter perspective — it travels
+  diagonally on the angle its art implies, so it appears to grow as it
+  approaches the viewer)
+- Animated sea for side-view vessels: a drifting swell pattern on the
+  surface, deterministic glints below, hull bob on a slow sine, bow
+  spray, and stern wake (three new particle kinds: spray, wake, bubble)
+- `-d`/`--dolphin` — on special request, a dolphin dives ahead of the
+  ship along its drawn angle, cut cleanly at the waterline, with splash.
+  Requesting a dolphin with a train books sea passage instead
+- At sea, `-a` finds an iceberg: crunch, shudder, bubbles, and a
+  dignified descent below the waterline. The iceberg wins
+- At sea, `-F` is the Flying Dutchman: the ship climbs out of the water
+  trailing stardust while the sea stays below
+- Per-vessel whistles for `-w`: the steamer HOOOONKs, the tug TOOOOTs,
+  the galleon goes YARRR!, the sloop rings its little bell
+- Per-vessel liveries (white sails, red hulls, brass fittings), honored
+  in surprise mode too
+- Surprise mode: about 1 typo in 3 is now nautical; dolphins accompany
+  1 in 5 sea voyages
+- CODE_OF_CONDUCT.md (Contributor Covenant 2.1), fixing the broken link in
+  CONTRIBUTING.md
+- `--speed` help text now documents the 0.1–20 clamp
+
+### Changed
+- `-n`/`--cars` is rail-only; coal cars do not float and the count is
+  ignored at sea (documented in `--help`)
+- `-t`/`--type` now fully overrides `-l`: it no longer inherits the two
+  implicit coal cars (`-l` alone still couples them)
+
+### Fixed
+- Trailing smoke now lingers and dissipates after the train exits, instead
+  of being cut off the moment the last car leaves the screen
+- In accident mode on terminals narrower than the train, the crash now
+  happens at the left edge instead of off-screen
+- `make demo` labeled its first run "Classic Train" but ran surprise mode;
+  it now runs `./sl -t classic`
+- LICENSE copyright year updated to 2024-2026
+
+### Notes
+- Tug and dolphin artwork adapted from reference pieces contributed by
+  the project author
+
 ## [3.1.0] - 2026-07-06
 
 ### Added

@@ -43,17 +43,68 @@ Very rarely, it does not make it across.
 
 | Event | Odds |
 |-------|------|
-| 📣 The train whistles | 1 in 4 |
+| ⚓ The typo turns out to be nautical | about 1 in 3 |
+| 📣 The train (or ship) whistles | 1 in 4 |
+| 🐬 A dolphin escorts the voyage | 1 in 5 sea voyages |
 | ✈️ The train takes flight | 1 in 10 |
-| 💥 The train does not arrive at the station | 1 in 20 |
+| 💥 The journey does not reach its destination | 1 in 20 |
 
 Pass any flag and the dice are off — explicit options are fully
 deterministic, so your customizations always behave exactly as written.
+
+## ⚓ New in 4.0: the rails end at a shoreline
+
+Four vessels join the roster. Type `sl -t galleon` and a three-masted
+pirate ship crosses your terminal on an animated sea — flapping Jolly
+Roger, turning nothing, fearing nothing, figurehead shaped like a rubber
+duck. Her name is SQUEAKY. She has gunports.
+
+```
+                                     |~~~~~~,
+                             ` ` ` ` |x_x__/
+                   ` ` ` ` `         |     ` ` `
+                 |>                  |           ` ` `
+             .___|___.           .___|___.             |>
+             (   |   \           (   |   \             |
+            (    |    \         (    |    \       .____|____.
+           (___________\       (___________\      (  ( | )  \
+         `       |                   |           (  (  |  )  \
+            .____|____.         .____|____.     (  (   |   )  \
+       `    (  ( | )  \         (  ( | )  \    (__)_________(__\
+     ` /|  (  (  |  )  \       (  (  |  )  \           |
+      / | (  (   |   )  \     (  (   |   )  \         /|    _____
+   ` /  |(__)_________(__\   (__)_________(__\       / | __|~ ~ ~|
+    /   |       /|\                 /|\             /  ||  o  o  |
+<o)_/___|      / | \               / | \           /   || o  o   |
+  \__\__________________________________________________|________|
+    |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
+    \   []    []    []    []    []    []    []    []    []      |
+     \_________S Q U E A K Y____________________________________/
+      \=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_/
+```
+
+The fleet:
+
+- 🏴‍☠️ **`galleon`** — the Jolly Roger flaps on a 4-frame cycle, pennants
+  flick, and the sea shimmers under her hull
+- 🛞 **`steamer`** — a sternwheeler whose paddle wheel actually turns
+  (same 4-frame machinery as the locomotive wheels), churn streaming aft
+- ⛵ **`sloop`** — a racing yacht for narrow terminals
+- 🚢 **`tug`** — drawn in three-quarter perspective, so it travels
+  *diagonally*, on the angle its art implies, growing as it approaches
+
+Sea voyages come with bow spray, stern wake, hull bob, and per-vessel
+whistles (`-w`): the steamer HOOOONKs, the galleon goes YARRR!. At sea,
+`-a` finds an iceberg — crunch, bubbles, and a dignified descent. `-F`
+is the Flying Dutchman. And on special request, `-d` summons a dolphin
+that dives ahead of the ship, cut cleanly at the waterline.
 
 ## ✨ Features
 
 - 🎲 **Surprise mode** — a bare `sl` randomizes the whole show, every run
 - 🚂 **Four locomotives** — Classic, Small, D51, and C51 (`-t`)
+- ⚓ **Four vessels** — Galleon, Steamer, Sloop, and Tug (`-t`), with an
+  animated sea, spray, wake, and a dolphin on request (`-d`)
 - 🛞 **Animated wheels** — a 4-frame rotation cycle on every engine
 - 💨 **Particle smoke** — drifts behind the train and dissipates, with grayscale shading on 256-color terminals
 - 🚃 **Coal cars** — couple up to 8 tenders behind the engine (`-n`)
@@ -120,9 +171,10 @@ $ sl -s 0.1       # You do not
 | `-F` | `--fly` | Make the train fly through the sky |
 | `-l` | `--long` | Use a longer train (D51 pulling coal cars) |
 | `-c` | `--C51` | Use the C51 train type |
-| `-t` | `--type` | Locomotive type: `classic`, `small`, `d51`, `c51` (overrides `-l`/`-c`) |
-| `-n` | `--cars` | Number of coal cars to pull, up to 8 (default: 0) |
-| `-w` | `--whistle` | Sound the whistle as the train passes |
+| `-t` | `--type` | Type: `classic`, `small`, `d51`, `c51`, `galleon`, `steamer`, `sloop`, `tug` (overrides `-l`/`-c`) |
+| `-n` | `--cars` | Number of coal cars to pull, up to 8 (default: 0; rail only — coal cars do not float) |
+| `-d` | `--dolphin` | A dolphin joins the voyage (implies a vessel) |
+| `-w` | `--whistle` | Sound the whistle as the train or ship passes |
 | `-s` | `--speed` | Animation speed multiplier, 0.1–20 (default: 1.0) |
 | | `--no-color` | Disable colors (`NO_COLOR` is also honored) |
 | `-v` | `--version` | Show version information |
@@ -172,6 +224,14 @@ of surprise mode, and honestly, it's a little bit on you for typing `sl`.
 
 **Why would a train fly?**
 1-in-10 odds say you'll find out.
+
+**I asked for a dolphin and got a ship.**
+A dolphin will not follow a train. Requesting one books sea passage.
+
+**Why does the tug move diagonally?**
+It was drawn in three-quarter perspective, so it sails the angle its
+art implies — toward you. It appears to grow because it is, in the
+only sense that matters, getting closer.
 
 **Is this compatible with the original `sl`?**
 The spirit, the D51/C51 art heritage, and the `-a`/`-F`/`-l`/`-c` flags are
